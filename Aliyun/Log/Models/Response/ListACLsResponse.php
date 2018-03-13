@@ -4,19 +4,18 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
-
+namespace Aliyun\Log\Models\Response;
+use Aliyun\Log\Models\ACL;
 /**
- * The response of the GetLog API from log service.
- *
- * @author log service dev
+ * Class ListACLsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_ListACLsResponse extends Aliyun_Log_Models_Response {
+class ListACLsResponse extends Response {
 
 
     private $acls; 
     /**
-     * Aliyun_Log_Models_ListACLsResponse constructor
+     * ListACLsResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body
@@ -28,7 +27,7 @@ class Aliyun_Log_Models_ListACLsResponse extends Aliyun_Log_Models_Response {
         $aclArr = array();
         if(isset($resp['acls'])){
             foreach($resp['acls'] as $value){
-                $aclObj = new Aliyun_Log_Models_ACL();
+                $aclObj = new ACL();
                 $aclObj->setFromArray($value);
                 $aclArr[]=$aclObj;
             }

@@ -6,15 +6,16 @@
  */
 
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
-require_once realpath(dirname(__FILE__) . '/Histogram.php');
+namespace Aliyun\Log\Models\Response;
+
+use Aliyun\Log\Models\Histogram;
 
 /**
  * The response of the GetHistograms API from log service.
- *
- * @author log service dev
+ * Class GetHistogramsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_GetHistogramsResponse extends Aliyun_Log_Models_Response {
+class GetHistogramsResponse extends Response {
     
     /**
      * @var string histogram query status(Complete or InComplete)
@@ -27,12 +28,12 @@ class Aliyun_Log_Models_GetHistogramsResponse extends Aliyun_Log_Models_Response
     private $count;
     
     /**
-     * @var array Aliyun_Log_Models_Histogram array, histograms on the requested time range: [from, to)
+     * @var array Histogram array, histograms on the requested time range: [from, to)
      */
-    private $histograms; // List<Aliyun_Log_Models_Histogram>
+    private $histograms; // List<Histogram>
     
     /**
-     * Aliyun_Log_Models_GetHistogramsResponse constructor
+     * GetHistogramsResponse constructor
      *
      * @param array $resp
      *            GetHistogramsResponse HTTP response body
@@ -45,7 +46,7 @@ class Aliyun_Log_Models_GetHistogramsResponse extends Aliyun_Log_Models_Response
         $this->count = $header ['x-log-count'];
         $this->histograms = array ();
         foreach ( $resp  as $data )
-            $this->histograms [] = new Aliyun_Log_Models_Histogram ( $data ['from'], $data ['to'], $data ['count'], $data ['progress'] );
+            $this->histograms [] = new Histogram ( $data ['from'], $data ['to'], $data ['count'], $data ['progress'] );
     }
     
     /**
@@ -69,7 +70,7 @@ class Aliyun_Log_Models_GetHistogramsResponse extends Aliyun_Log_Models_Response
     /**
      * Get histograms on the requested time range: [from, to)
      *
-     * @return array Aliyun_Log_Models_Histogram array, histograms on the requested time range
+     * @return array Histogram array, histograms on the requested time range
      */
     public function getHistograms() {
         return $this->histograms;

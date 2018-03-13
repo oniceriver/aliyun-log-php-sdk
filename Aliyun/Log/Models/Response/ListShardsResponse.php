@@ -4,19 +4,20 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
-require_once realpath(dirname(__FILE__) . '/Shard.php');
+namespace Aliyun\Log\Models\Response;
+
 
 /**
- * The response of the GetLog API from log service.
- *
- * @author log service dev
+ * Class ListShardsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_ListShardsResponse extends Aliyun_Log_Models_Response {
+class ListShardsResponse extends Response {
 
-    private $shardIds; 
+    private $shardIds;
+
+    private $shards;
     /**
-     * Aliyun_Log_Models_ListShardsResponse constructor
+     * ListShardsResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body
@@ -27,7 +28,7 @@ class Aliyun_Log_Models_ListShardsResponse extends Aliyun_Log_Models_Response {
         parent::__construct ( $header );
         foreach($resp as $key=>$value){
             $this->shardIds[] = $value['shardID'];
-            $this->shards[] = new Aliyun_Log_Models_Shard($value['shardID'],$value["status"],$value["inclusiveBeginKey"],$value["exclusiveEndKey"],$value["createTime"]);
+            $this->shards[] = new Shard($value['shardID'],$value["status"],$value["inclusiveBeginKey"],$value["exclusiveEndKey"],$value["createTime"]);
         }
     }
 

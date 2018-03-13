@@ -4,20 +4,21 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class DeleteMachineGroupRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_DeleteMachineGroupRequest extends Aliyun_Log_Models_Request {
+class DeleteMachineGroupRequest extends Request {
 
 
-    private $groupName; 
+    private $groupName;
+
     /**
-     * Aliyun_Log_Models_DeleteMachineGroupRequest Constructor
+     * DeleteMachineGroupRequest constructor.
      *
+     * @param string $groupName
      */
     public function __construct($groupName) {
         $this->groupName = $groupName;

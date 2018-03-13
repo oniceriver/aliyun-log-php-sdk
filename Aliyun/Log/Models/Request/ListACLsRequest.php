@@ -4,22 +4,24 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class ListACLsRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_ListACLsRequest extends Aliyun_Log_Models_Request {
+class ListACLsRequest extends Request {
 
     private $offset;
     private $size;
     private $principleId;
 
     /**
-     * Aliyun_Log_Models_ListACLsRequest Constructor
+     * ListACLsRequest constructor.
      *
+     * @param null $principleId
+     * @param null $offset
+     * @param null $size
      */
     public function __construct($principleId=null,$offset=null,$size=null) {
         $this->offset = $offset;

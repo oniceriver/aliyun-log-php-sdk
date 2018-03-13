@@ -4,20 +4,22 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class DeleteShardRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_DeleteShardRequest extends Aliyun_Log_Models_Request {
+class DeleteShardRequest extends Request {
 
     private $logstore;
 
     /**
-     * Aliyun_Log_Models_DeleteShardRequest Constructor
+     * DeleteShardRequest constructor.
      *
+     * @param string $project
+     * @param        $logstore
+     * @param        $shardId
      */
     public function __construct($project,$logstore,$shardId) {
         parent::__construct ( $project );

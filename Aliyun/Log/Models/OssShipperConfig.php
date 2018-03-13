@@ -4,7 +4,10 @@
  * All rights reserved
  */
 
-class Aliyun_Log_Models_OssShipperConfig{
+namespace Aliyun\Log\Models;
+use Aliyun\Log\Exception;
+class OssShipperConfig
+{
 
     private $ossBucket;
     private $ossPrefix;
@@ -124,8 +127,8 @@ class Aliyun_Log_Models_OssShipperConfig{
      */
     public function setBufferSize($bufferSize)
     {
-        if($bufferSize > 256 || $bufferSize < 5){
-            throw new Exception("buffSize is not valide, must between 5 and 256");
+        if ($bufferSize > 256 || $bufferSize < 5) {
+            throw new Exception(1, "buffSize is not valide, must between 5 and 256");
         }
         $this->bufferSize = $bufferSize;
     }
@@ -147,18 +150,19 @@ class Aliyun_Log_Models_OssShipperConfig{
     }
 
 
-    public function to_json_object() {
-        $json =  array(
-            'ossBucket' => $this->ossBucket,
-            'ossPrefix' => $this->ossPrefix,
+    public function to_json_object()
+    {
+        $json = array(
+            'ossBucket'      => $this->ossBucket,
+            'ossPrefix'      => $this->ossPrefix,
             'bufferInterval' => $this->bufferInterval,
-            'bufferSize' => $this->bufferSize,
-            'compressType' => $this->compressType,
-            'roleArn' => $this->roleArn,
-            'pathFormat' => $this->pathFormat,
-            'storage' => $this->storage->to_json_object()
+            'bufferSize'     => $this->bufferSize,
+            'compressType'   => $this->compressType,
+            'roleArn'        => $this->roleArn,
+            'pathFormat'     => $this->pathFormat,
+            'storage'        => $this->storage->to_json_object()
         );
-        if($this->storage->getFormat() == 'json'){
+        if ($this->storage->getFormat() == 'json') {
             unset($json['storage']);
         }
         return $json;

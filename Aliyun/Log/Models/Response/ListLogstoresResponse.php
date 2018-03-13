@@ -4,14 +4,14 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
  * The response of the ListLogstores API from log service.
- *
- * @author log service dev
+ * Class ListLogstoresResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_ListLogstoresResponse extends Aliyun_Log_Models_Response {
+class ListLogstoresResponse extends Response {
     
     /**
      * @var integer the number of total logstores from the response
@@ -24,7 +24,7 @@ class Aliyun_Log_Models_ListLogstoresResponse extends Aliyun_Log_Models_Response
     private $logstores;
     
     /**
-     * Aliyun_Log_Models_ListLogstoresResponse constructor
+     * ListLogstoresResponse constructor
      *
      * @param array $resp
      *            ListLogstores HTTP response body

@@ -3,15 +3,14 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
  * The request used to get logs by logstore and shardId from log service.
- *
- * @author log service dev
+ * Class BatchGetLogsRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_BatchGetLogsRequest extends Aliyun_Log_Models_Request {
+class BatchGetLogsRequest extends Request {
     
     /**
      * @var string logstore name
@@ -32,20 +31,15 @@ class Aliyun_Log_Models_BatchGetLogsRequest extends Aliyun_Log_Models_Request {
      * @var string start cursor
      */
     private $cursor;
-    
+
     /**
-     * Aliyun_Log_Models_BatchGetLogsRequest Constructor
+     * BatchGetLogsRequest constructor.
      *
-     * @param string $project
-     *            project name
-     * @param string $logStore
-     *            logstore name
-     * @param string $shardId
-     *            shard ID
-     * @param integer $count
-     *            return max loggroup numbers
-     * @param string $cursor
-     *            start cursor
+     * @param null $project
+     * @param null $logstore
+     * @param null $shardId
+     * @param null $count
+     * @param null $cursor
      */
     public function __construct($project = null, $logstore = null, $shardId = null, $count = null, $cursor = null) {
         parent::__construct ( $project );    

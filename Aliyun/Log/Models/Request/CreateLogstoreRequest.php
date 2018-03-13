@@ -4,22 +4,26 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
  * The request used to create logstore from log service.
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_CreateLogstoreRequest extends Aliyun_Log_Models_Request{
+class CreateLogstoreRequest extends Request{
 
     private  $logstore;
     private  $ttl;
     private  $shardCount;
+
     /**
-     * Aliyun_Log_Models_CreateLogstoreRequest constructor
-     * 
-     * @param string $project project name
+     * CreateLogstoreRequest constructor.
+     *
+     * @param null $project
+     * @param null $logstore
+     * @param null $ttl
+     * @param null $shardCount
      */
     public function __construct($project=null,$logstore = null,$ttl = null,$shardCount = null) {
         parent::__construct($project);

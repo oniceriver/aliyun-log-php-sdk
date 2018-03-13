@@ -4,10 +4,13 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
-
-class Aliyun_Log_Models_ListShipperResponse extends Aliyun_Log_Models_Response {
+/**
+ * Class ListShipperResponse
+ * @package Aliyun\Log\Models\Response
+ */
+class ListShipperResponse extends Response {
     private $count;
     private $total;
     private $shippers;
@@ -62,7 +65,7 @@ class Aliyun_Log_Models_ListShipperResponse extends Aliyun_Log_Models_Response {
 
 
     /**
-     * Aliyun_Log_Models_ListShipperResponse constructor
+     * ListShipperResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body

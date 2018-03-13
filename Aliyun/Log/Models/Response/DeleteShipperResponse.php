@@ -4,12 +4,16 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
-class Aliyun_Log_Models_DeleteShipperResponse extends Aliyun_Log_Models_Response {
+/**
+ * Class DeleteShipperResponse
+ * @package Aliyun\Log\Models\Response
+ */
+class DeleteShipperResponse extends Response {
 
     /**
-     * Aliyun_Log_Models_DeleteShipperResponse constructor
+     * DeleteShipperResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body

@@ -312,4 +312,4 @@ class Protobuf {
 		return $ret;
 	}
 }
-?>
+

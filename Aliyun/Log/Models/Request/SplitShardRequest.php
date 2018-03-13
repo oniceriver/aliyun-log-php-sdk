@@ -4,20 +4,27 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class SplitShardRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_SplitShardRequest extends Aliyun_Log_Models_Request {
+class SplitShardRequest extends Request {
 
     private $logstore;
 
+    private $shardId;
+
+    private $midHash;
+
     /**
-     * Aliyun_Log_Models_SplitShardRequest Constructor
+     * SplitShardRequest constructor.
      *
+     * @param $project
+     * @param $logstore
+     * @param $shardId
+     * @param $midHash
      */
     public function __construct($project,$logstore,$shardId,$midHash) {
         parent::__construct ( $project );

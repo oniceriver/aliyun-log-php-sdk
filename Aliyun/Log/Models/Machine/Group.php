@@ -3,25 +3,9 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
+namespace Aliyun\Log\Models\Machine;
 
-class Aliyun_Log_Models_MachineGroup_GroupAttribute {
-    public $externalName;
-    public $groupTopic;
-    public function __construct($externalName=null,$groupTopic=null){
-      $this->externalName = $externalName;
-      $this->groupTopic = $groupTopic;
-    }
-    public function toArray(){
-      $resArray = array();
-      if($this->externalName!==null)
-        $resArray['externalName'] = $this->externalName;
-      if($this->groupTopic!==null)
-        $resArray['groupTopic'] = $this->groupTopic;
-      return $resArray;
-    }
-}
-
-class Aliyun_Log_Models_MachineGroup {
+class Group {
     private $groupName;
     private $groupType;
     private $groupAttribute;
@@ -114,7 +98,7 @@ class Aliyun_Log_Models_MachineGroup {
         $machineList = array();
         if(isset($resp['machineList']) && is_array($resp['machineList']) && count($resp['machineList'])>0){
           foreach($resp['machineList'] as $value){
-            $machine = new Aliyun_Log_Models_Machine();
+            $machine = new Machine();
             $machine->setFromArray($value);
             $machineList[] = $machine;
           }

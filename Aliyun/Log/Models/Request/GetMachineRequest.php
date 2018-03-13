@@ -4,20 +4,20 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class GetMachineRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_GetMachineRequest extends Aliyun_Log_Models_Request {
+class GetMachineRequest extends Request {
     
     private $uuid;
 
     /**
-     * Aliyun_Log_Models_GetMachineRequest Constructor
+     * GetMachineRequest constructor.
      *
+     * @param null $uuid
      */
     public function __construct($uuid=null) {
         $this->uuid = $uuid;

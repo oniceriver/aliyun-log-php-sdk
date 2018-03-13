@@ -4,18 +4,18 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
  * The response of the GetLog API from log service.
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_CreateACLResponse extends Aliyun_Log_Models_Response {
+class CreateACLResponse extends Response {
 
     private $aclId; 
     /**
-     * Aliyun_Log_Models_Response constructor
+     * Response constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body

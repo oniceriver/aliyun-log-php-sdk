@@ -3,7 +3,7 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
+namespace Aliyun\Log\Models;
 /**
  * The class used to present the result of log histogram status. For every log
  * histogram, it contains : from/to time range, hit log count and query
@@ -11,7 +11,7 @@
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_Histogram {
+class Histogram {
     
     /**
      * @var integer the begin time

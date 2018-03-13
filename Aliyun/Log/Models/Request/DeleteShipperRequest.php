@@ -4,9 +4,13 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
-class Aliyun_Log_Models_DeleteShipperRequest extends Aliyun_Log_Models_Request {
+/**
+ * Class DeleteShipperRequest
+ * @package Aliyun\Log\Models\Request
+ */
+class DeleteShipperRequest extends Request {
     private $shipperName;
     private $logStore;
 
@@ -44,8 +48,9 @@ class Aliyun_Log_Models_DeleteShipperRequest extends Aliyun_Log_Models_Request {
     }
 
     /**
-     * Aliyun_Log_Models_CreateShipperRequest Constructor
+     * DeleteShipperRequest constructor.
      *
+     * @param string $project
      */
     public function __construct($project) {
         parent::__construct ( $project );

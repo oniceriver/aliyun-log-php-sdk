@@ -4,22 +4,24 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class ListMachineGroupsRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_ListMachineGroupsRequest extends Aliyun_Log_Models_Request {
+class ListMachineGroupsRequest extends Request {
 
     private $groupName;
     private $offset;
     private $size;
 
     /**
-     * Aliyun_Log_Models_ListMachineGroupsRequest Constructor
+     * ListMachineGroupsRequest constructor.
      *
+     * @param null $groupName
+     * @param null $offset
+     * @param null $size
      */
     public function __construct($groupName=null,$offset=null,$size=null) {
         $this->groupName = $groupName;

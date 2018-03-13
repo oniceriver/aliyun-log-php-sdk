@@ -4,19 +4,19 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
-
+namespace Aliyun\Log\Models\Response;
+use Aliyun\Log\Models\Machine\Machine;
 /**
  * The response of the GetLog API from log service.
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_GetMachineResponse extends Aliyun_Log_Models_Response {
+class GetMachineResponse extends Response {
 
     private $machine;
 
     /**
-     * Aliyun_Log_Models_GetMachineResponse constructor
+     * GetMachineResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body
@@ -26,7 +26,7 @@ class Aliyun_Log_Models_GetMachineResponse extends Aliyun_Log_Models_Response {
     public function __construct($resp, $header) {
         parent::__construct ( $header );
         //echo json_encode($resp);
-        $this->machine = new Aliyun_Log_Models_Machine();
+        $this->machine = new Machine();
         $this->machine->setFromArray($resp);
         
     }

@@ -4,20 +4,19 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
- * The response of the GetLog API from log service.
- *
- * @author log service dev
+ * Class ListMachineGroupsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_ListMachineGroupsResponse extends Aliyun_Log_Models_Response {
+class ListMachineGroupsResponse extends Response {
 
     private $offset;
     private $size;
     private $machineGroups;
     /**
-     * Aliyun_Log_Models_ListMachineGroupsResponse constructor
+     * ListMachineGroupsResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body

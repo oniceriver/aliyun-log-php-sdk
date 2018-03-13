@@ -5,14 +5,14 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
  * The response of the ListTopics API from log service.
- *
- * @author log service dev
+ * Class ListTopicsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_ListTopicsResponse extends Aliyun_Log_Models_Response {
+class ListTopicsResponse extends Response {
 
     /**
      * @var integer the number of all the topics from the response
@@ -30,7 +30,7 @@ class Aliyun_Log_Models_ListTopicsResponse extends Aliyun_Log_Models_Response {
     private $nextToken;
     
     /**
-     * Aliyun_Log_Models_ListTopicsResponse constructor
+     * ListTopicsResponse constructor
      *
      * @param array $resp
      *            ListTopics HTTP response body

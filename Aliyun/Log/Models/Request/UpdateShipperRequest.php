@@ -4,14 +4,18 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
-class Aliyun_Log_Models_UpdateShipperRequest extends Aliyun_Log_Models_Request{
+/**
+ * Class UpdateShipperRequest
+ * @package Aliyun\Log\Models\Request
+ */
+class UpdateShipperRequest extends Request{
     private $shipperName;
 
     private $targetType;
 
-    private $targetConfigration;
+    private $targetConfiguration;
 
     private $logStore;
 
@@ -32,8 +36,9 @@ class Aliyun_Log_Models_UpdateShipperRequest extends Aliyun_Log_Models_Request{
     }
 
     /**
-     * Aliyun_Log_Models_CreateShipperRequest Constructor
+     * UpdateShipperRequest constructor.
      *
+     * @param $project
      */
     public function __construct($project) {
         parent::__construct ( $project );
@@ -74,16 +79,16 @@ class Aliyun_Log_Models_UpdateShipperRequest extends Aliyun_Log_Models_Request{
     /**
      * @return mixed
      */
-    public function getTargetConfigration()
+    public function getTargetConfiguration()
     {
-        return $this->targetConfigration;
+        return $this->targetConfiguration;
     }
 
     /**
-     * @param mixed $targetConfigration
+     * @param mixed $targetConfiguration
      */
-    public function setTargetConfigration($targetConfigration)
+    public function setTargetConfiguration($targetConfiguration)
     {
-        $this->targetConfigration = $targetConfigration;
+        $this->targetConfiguration = $targetConfiguration;
     }
 }

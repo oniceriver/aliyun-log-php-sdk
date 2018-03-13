@@ -4,22 +4,26 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
  * The request used to Update logstore from log service.
- *
- * @author log service dev
+ * Class UpdateLogstoreRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_UpdateLogstoreRequest extends Aliyun_Log_Models_Request{
+class UpdateLogstoreRequest extends Request{
 
     private  $logstore;
     private  $ttl;
     private  $shardCount;
+
     /**
-     * Aliyun_Log_Models_UpdateLogstoreRequest constructor
-     * 
-     * @param string $project project name
+     * UpdateLogstoreRequest constructor.
+     *
+     * @param null $project
+     * @param null $logstore
+     * @param null $ttl
+     * @param null $shardCount
      */
     public function __construct($project=null,$logstore = null,$ttl = null,$shardCount = null) {
         parent::__construct($project);

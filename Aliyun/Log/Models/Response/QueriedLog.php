@@ -3,13 +3,14 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
+namespace Aliyun\Log\Models\Response;
 
 /**
- * The QueriedLog is a log of the Aliyun_Log_Models_GetLogsResponse which obtained from the log.
+ * The QueriedLog is a log of the GetLogsResponse which obtained from the log.
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_QueriedLog {
+class QueriedLog {
 
     /**
      * @var integer log timestamp
@@ -28,7 +29,7 @@ class Aliyun_Log_Models_QueriedLog {
     
     
     /**
-     * Aliyun_Log_Models_QueriedLog constructor
+     * QueriedLog constructor
      *
      * @param integer $time
      *            log time stamp

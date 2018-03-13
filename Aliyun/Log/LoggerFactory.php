@@ -4,12 +4,13 @@
  * All rights reserved
  */
 
+namespace Aliyun\Log;
 /**
- * Class Aliyun_Log_LoggerFactory
+ * Class LoggerFactory
  * Factory for creating logger instance, with $client, $project, $logstore, $topic configurable.
  * Will flush current logger when the factory instance was recycled.
  */
-class Aliyun_Log_LoggerFactory{
+class LoggerFactory{
 
     private static $loggerMap = array();
 

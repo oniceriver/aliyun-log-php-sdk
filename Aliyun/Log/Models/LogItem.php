@@ -3,14 +3,14 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
+namespace Aliyun\Log\Models;
 /**
- * Aliyun_Log_Models_LogItem used to present a log, it contains log time and multiple
+ * LogItem used to present a log, it contains log time and multiple
  * key/value pairs to present the log contents.
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_LogItem {
+class LogItem {
     
     /**
      * @var integer time of the log item, the default time if the now time.
@@ -23,7 +23,7 @@ class Aliyun_Log_Models_LogItem {
     private $contents;
     
     /**
-     * Aliyun_Log_Models_LogItem cnostructor
+     * LogItem constructor
      *
      * @param array $contents
      *            the data of the log item, including many key/value pairs.

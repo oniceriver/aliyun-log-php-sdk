@@ -4,15 +4,14 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
-require_once realpath ( dirname ( __FILE__ ) . '/../../sls.proto.php' );
-require_once realpath ( dirname ( __FILE__ ) . '/../../protocolbuffers.inc.php' );
+namespace Aliyun\Log\Models\Response;
+
 /**
  * The response of the GetLog API from log service.
- *
- * @author log service dev
+ * Class BatchGetLogsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_BatchGetLogsResponse extends Aliyun_Log_Models_Response {
+class BatchGetLogsResponse extends Response {
     
     /**
      * @var array compressed Loggroup array
@@ -21,7 +20,7 @@ class Aliyun_Log_Models_BatchGetLogsResponse extends Aliyun_Log_Models_Response 
     private $nextCursor;
     
     /**
-     * Aliyun_Log_Models_BatchGetLogsResponse constructor
+     * BatchGetLogsResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body
@@ -52,7 +51,7 @@ class Aliyun_Log_Models_BatchGetLogsResponse extends Aliyun_Log_Models_Response 
             return $this->logPackageList[$index];
         }
         else{
-            throw new OutOfBoundsException('Index must less than size of logPackageList');
+            throw new \OutOfBoundsException('Index must less than size of logPackageList');
         }
     }
 
@@ -65,7 +64,7 @@ class Aliyun_Log_Models_BatchGetLogsResponse extends Aliyun_Log_Models_Response 
             return  $this->logPackageList[$index];
         }
         else{
-            throw new OutOfBoundsException('Index must less than size of logPackageList');
+            throw new \OutOfBoundsException('Index must less than size of logPackageList');
         }
     }
 

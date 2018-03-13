@@ -4,19 +4,20 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class GetACLRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_GetACLRequest extends Aliyun_Log_Models_Request {
+class GetACLRequest extends Request {
     
     private $aclId;
+
     /**
-     * Aliyun_Log_Models_GetACLRequest Constructor
+     * GetACLRequest constructor.
      *
+     * @param null $aclId
      */
     public function __construct($aclId=null) {
         $this->aclId = $aclId;

@@ -4,13 +4,14 @@
  * All rights reserved
  */
 
+namespace Aliyun\Log\Models;
 /**
- * Aliyun_Log_Models_CompressedLogGroup is compressed LogGroup, 
- * LogGroup infomation please refer to Aliyun_Log_Models_LogGroup
+ * CompressedLogGroup is compressed LogGroup,
+ * LogGroup infomation please refer to Aliyun\Log\Models\LogGroup
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_CompressedLogGroup {
+class CompressedLogGroup {
 
     /**
      * @var integer uncompressed LogGroup size
@@ -24,6 +25,9 @@ class Aliyun_Log_Models_CompressedLogGroup {
      */
     protected $compressedData;
 
+    protected $time;
+
+    protected $contents;
 
     public function __construct($time = null, $contents = null) {
         if (! $time)

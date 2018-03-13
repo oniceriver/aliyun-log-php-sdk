@@ -3,24 +3,24 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
+namespace Aliyun\Log\Models\Request;
 /**
  * The base request of all log request.
- *
- * @author log service dev
+ * Class Request
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_Request {
+class Request {
 
     /**
      * @var string project name
      */
     private $project;
-    
+
     /**
-     * Aliyun_Log_Models_Request constructor
+     * Request constructor.
      *
-     * @param string $project
-     *            project name
+     * @param $project
+     *           project name
      */
     public function __construct($project) {
         $this->project = $project;

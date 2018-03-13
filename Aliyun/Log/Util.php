@@ -5,7 +5,9 @@
  * All rights reserved
  */
 
-class Aliyun_Log_Util {
+namespace Aliyun\Log;
+
+class Util {
 
     /**
      * Get the local machine ip address.
@@ -211,9 +213,9 @@ class Aliyun_Log_Util {
             $content .= $headers ['Content-Type'];
         $content .= "\n";
         $content .= $headers ['Date'] . "\n";
-        $content .= Aliyun_Log_Util::canonicalizedLOGHeaders ( $headers ) . "\n";
-        $content .= Aliyun_Log_Util::canonicalizedResource ( $resource, $params );
-        return Aliyun_Log_Util::hmacSHA1 ( $content, $key );
+        $content .= static::canonicalizedLOGHeaders ( $headers ) . "\n";
+        $content .= static::canonicalizedResource ( $resource, $params );
+        return static::hmacSHA1 ( $content, $key );
     }
 
 }

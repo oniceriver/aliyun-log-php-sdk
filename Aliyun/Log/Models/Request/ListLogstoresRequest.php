@@ -4,19 +4,19 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
  * The request used to list logstore from log service.
- *
- * @author log service dev
+ * Class ListLogstoresRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_ListLogstoresRequest extends Aliyun_Log_Models_Request{
-    
+class ListLogstoresRequest extends Request{
+
     /**
-     * Aliyun_Log_Models_ListLogstoresRequest constructor
-     * 
-     * @param string $project project name
+     * ListLogstoresRequest constructor.
+     *
+     * @param null $project
      */
     public function __construct($project=null) {
         parent::__construct($project);

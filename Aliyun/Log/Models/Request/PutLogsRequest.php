@@ -5,14 +5,14 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
  * The request used to send data to log server.
- *
- * @author log service dev
+ * Class PutLogsRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_PutLogsRequest extends Aliyun_Log_Models_Request {
+class PutLogsRequest extends Request {
 
     /**
      * @var string logstore name
@@ -140,10 +140,10 @@ class Aliyun_Log_Models_PutLogsRequest extends Aliyun_Log_Models_Request {
     /**
      * set shard key
      *
-     * @param string shardkey
+     * @param string shardKey
      */
-    public function setShardKey($key){
-        $this -> shardKey=$key;
+    public function setShardKey($shardKey){
+        $this->shardKey=$shardKey;
     }
     /**
      * get shard key

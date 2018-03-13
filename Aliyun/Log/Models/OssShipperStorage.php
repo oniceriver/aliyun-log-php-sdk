@@ -3,8 +3,8 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
-class Aliyun_Log_Models_OssShipperStorage{
+namespace Aliyun\Log\Models;
+class OssShipperStorage{
     private $format;
 
     /**

@@ -9,6 +9,7 @@
  * @copyright 2008-2011 Contributors
  * @license http://opensource.org/licenses/bsd-license.php Simplified BSD License
  */
+namespace Aliyun\Log;
 class RequestCore
 {
 	/**
@@ -1019,8 +1020,3 @@ class ResponseCore
 		return $this->status === $codes;
 	}
 }
-
-/**
- * Default RequestCore Exception.
- */
-class RequestCore_Exception extends Exception {}

@@ -4,22 +4,18 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
- * The response of the GetLog API from log service.
- *
- * @author log service dev
+ * Class RemoveConfigFromMachineGroupResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_RemoveConfigFromMachineGroupResponse extends Aliyun_Log_Models_Response {
-    
+class RemoveConfigFromMachineGroupResponse extends Response {
+
     /**
-     * Aliyun_Log_Models_Response constructor
+     * RemoveConfigFromMachineGroupResponse constructor.
      *
-     * @param array $resp
-     *            GetLogs HTTP response body
-     * @param array $header
-     *            GetLogs HTTP response header
+     * @param $header
      */
     public function __construct($header) {
         parent::__construct ( $header );

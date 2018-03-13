@@ -4,19 +4,21 @@
  * All rights reserved
  */
 
+namespace Aliyun\Log;
+
 /**
  * The Exception of the log serivce request & response.
  *
  * @author log service dev
  */
-class Aliyun_Log_Exception extends Exception{
+class Exception extends \Exception{
     /**
      * @var string
      */
     private $requestId;
     
     /**
-     * Aliyun_Log_Exception constructor
+     * Aliyun\Log\Exception constructor
      *
      * @param string $code
      *            log service error code.
@@ -39,7 +41,7 @@ class Aliyun_Log_Exception extends Exception{
      * @return string
      */
     public function __toString() {
-        return "Aliyun_Log_Exception: \n{\n    ErrorCode: $this->code,\n    ErrorMessage: $this->message\n    RequestId: $this->requestId\n}\n";
+        return "Aliyun\Log\Exception: \n{\n    ErrorCode: $this->code,\n    ErrorMessage: $this->message\n    RequestId: $this->requestId\n}\n";
     }
     
     /**
@@ -52,7 +54,7 @@ class Aliyun_Log_Exception extends Exception{
     }
     
     /**
-     * Get Aliyun_Log_Exception error message.
+     * Get Aliyun\Log\Exception error message.
      *
      * @return string
      */

@@ -4,9 +4,12 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
-
-class Aliyun_Log_Models_GetShipperTasksRequest extends Aliyun_Log_Models_Request{
+namespace Aliyun\Log\Models\Request;
+/**
+ * Class GetShipperTasksRequest
+ * @package Aliyun\Log\Models\Request
+ */
+class GetShipperTasksRequest extends Request{
     private $shipperName;
     private $logStore;
 
@@ -137,8 +140,9 @@ class Aliyun_Log_Models_GetShipperTasksRequest extends Aliyun_Log_Models_Request
     }
 
     /**
-     * Aliyun_Log_Models_CreateShipperRequest Constructor
+     * GetShipperTasksRequest constructor.
      *
+     * @param string $project
      */
     public function __construct($project) {
         parent::__construct ( $project );

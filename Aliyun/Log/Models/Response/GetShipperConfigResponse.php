@@ -4,15 +4,19 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 
-class Aliyun_Log_Models_GetShipperConfigResponse extends Aliyun_Log_Models_Response {
+/**
+ * Class GetShipperConfigResponse
+ * @package Aliyun\Log\Models\Response
+ */
+class GetShipperConfigResponse extends Response {
     private $shipperName;
 
     private $targetType;
 
-    private $targetConfigration;
+    private $targetConfiguration;
 
     /**
      * @return mixed
@@ -49,23 +53,23 @@ class Aliyun_Log_Models_GetShipperConfigResponse extends Aliyun_Log_Models_Respo
     /**
      * @return mixed
      */
-    public function getTargetConfigration()
+    public function getTargetConfiguration()
     {
-        return $this->targetConfigration;
+        return $this->targetConfiguration;
     }
 
     /**
-     * @param mixed $targetConfigration
+     * @param mixed $targetConfiguration
      */
-    public function setTargetConfigration($targetConfigration)
+    public function setTargetConfiguration($targetConfiguration)
     {
-        $this->targetConfigration = $targetConfigration;
+        $this->targetConfiguration = $targetConfiguration;
     }
 
 
 
     /**
-     * Aliyun_Log_Models_GetShipperConfigResponse constructor
+     * GetShipperConfigResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body
@@ -75,7 +79,7 @@ class Aliyun_Log_Models_GetShipperConfigResponse extends Aliyun_Log_Models_Respo
     public function __construct($resp, $header) {
         parent::__construct ( $header );
         $this->shipperName = $resp['shipperName'];
-        $this->targetConfigration = $resp['targetConfiguration'];
+        $this->targetConfiguration = $resp['targetConfiguration'];
         $this->targetType = $resp['targetType'];
     }
 }

@@ -1,12 +1,16 @@
 <?php
+
+namespace Aliyun\Log\Models\Response;
 /**
- * The class used to present the shard detail, for every shard ,it  contains id , status , begin Range, end range, createtime
+ * The class used to present the shard detail, for every shard ,it  contains id , status , begin Range, end range,
+ * createtime
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_Shard{
+class Shard
+{
     /**
-     * @var interger  the shard id
+     * @var int  the shard id
      */
     private $shardId;
 
@@ -31,25 +35,32 @@ class Aliyun_Log_Models_Shard{
     private $createTime;
 
     /**
-     * Aliyun_Log_Models_Shhard constructor
+     * @var
+     */
+    private $exclusiveBeginKey;
+
+    /**
+     * Shhard constructor
      *
      * @param integer $shardId
      *                  the shard id
      * @param string  $status
      *                  the shard status
-     * @param string $inclusiveBeginKey
+     * @param string  $inclusiveBeginKey
      *                  the shard inclusive begin key
-     * @param string $exclusiveEndKey
+     * @param string  $exclusiveEndKey
      *                  the shard exclusive end key
+     *
      * @para integer @createTime
      *                  the shard create time
      */
-    public function __construct($shardId,$status,$inclusiveBeginKey,$exclusiveEndKey,$createTime) {
-        $this->shardId=$shardId;
-        $this->status = $status;
+    public function __construct($shardId, $status, $inclusiveBeginKey, $exclusiveEndKey, $createTime)
+    {
+        $this->shardId           = $shardId;
+        $this->status            = $status;
         $this->inclusiveBeginKey = $inclusiveBeginKey;
-        $this->exclusiveEndKey = $exclusiveEndKey;
-        $this->createTime = $createTime;
+        $this->exclusiveEndKey   = $exclusiveEndKey;
+        $this->createTime        = $createTime;
     }
 
     /**
@@ -57,39 +68,48 @@ class Aliyun_Log_Models_Shard{
      *
      * @return integer the shard id
      */
-    public function getShardId(){
-        return $this -> shardId;
+    public function getShardId()
+    {
+        return $this->shardId;
     }
+
     /**
      * Get the shard status
      *
      * @return string the shard status
      */
-    public function getStatus(){
-        return $this -> status;
+    public function getStatus()
+    {
+        return $this->status;
     }
+
     /**
      * Get the shard inclusive begin key
      *
      * @return string inclusive begin key
      */
-    public function getInclusiveBeginKey(){
-        return $this -> inclusiveBeginKey;
+    public function getInclusiveBeginKey()
+    {
+        return $this->inclusiveBeginKey;
     }
+
     /**
      * Get the shard exclusive begin key
      *
      * @return string exclusive begin key
      */
-    public function getExclusiveBeginKey(){
-        return $this -> exclusiveBeginKey;
+    public function getExclusiveBeginKey()
+    {
+        return $this->exclusiveBeginKey;
     }
+
     /**
      * Get the shard create time
      *
      * @return integer createTime
      */
-    public function  getCreateTime(){
-        return $this -> createTime;
+    public function getCreateTime()
+    {
+        return $this->createTime;
     }
 }

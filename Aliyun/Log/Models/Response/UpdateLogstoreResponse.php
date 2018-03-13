@@ -4,22 +4,20 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
  * The response of the UpdateLogstore API from log service.
- *
- * @author log service dev
+ * Class UpdateLogstoreResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_UpdateLogstoreResponse extends Aliyun_Log_Models_Response {
-    
+class UpdateLogstoreResponse extends Response {
+
     /**
-     * Aliyun_Log_Models_UpdateLogstoreResponse constructor
+     * UpdateLogstoreResponse constructor.
      *
-     * @param array $resp
-     *            UpdateLogstore HTTP response body
-     * @param array $header
-     *            UpdateLogstore HTTP response header
+     * @param $resp
+     * @param $header
      */
     public function __construct($resp, $header) {
         parent::__construct ( $header );

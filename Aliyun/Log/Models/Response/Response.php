@@ -3,24 +3,24 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
+namespace Aliyun\Log\Models\Response;
 /**
  * The base response class of all log response.
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_Response {
+class Response {
 
     /**
      * @var array HTTP response header
      */
     private $headers;
-    
+
     /**
-     * Aliyun_Log_Models_Response constructor
+     * Response constructor.
      *
-     * @param array $header
-     *            HTTP response header
+     * @param $headers
+     *          HTTP response header
      */
     public function __construct($headers) {
         $this->headers = $headers;

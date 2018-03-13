@@ -4,18 +4,19 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_ListConfigsResponse extends Aliyun_Log_Models_Response {
+class ListConfigsResponse extends Response {
     
     private $total;
     private $configs;
+    private $size;
     /**
-     * Aliyun_Log_Models_ListConfigsResponse constructor
+     * ListConfigsResponse constructor
      *
      * @param array $resp
      *            GetLogs HTTP response body

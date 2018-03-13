@@ -3,83 +3,9 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
+namespace Aliyun\Log\Models\Config;
 
-class Aliyun_Log_Models_Config_InputDetail {
-  public $filePattern;
-  public $key;
-  public $localStorage;
-  public $logBeginRegex;
-  public $logPath;
-  public $logType;
-  public $regex;
-  public $timeFormat;
-  public $filterRegex;
-  public $filterKey;
-  public $topicFormat;
-  
-  public function __construct($filePattern='',$key=array(),$localStorage=true,
-    $logBeginRegex='',$logPath='',$logType='',$regex='',
-    $timeFormat='',$filterRegex=array(),$filterKey=array(),$topicFormat='none'){
-    $this->filePattern=$filePattern;
-    $this->key=$key;
-    $this->localStorage=$localStorage;
-    $this->logBeginRegex=$logBeginRegex;
-    $this->logPath=$logPath;
-    $this->logType=$logType;
-    $this->regex=$regex;
-    $this->timeFormat=$timeFormat;
-    $this->filterRegex=$filterRegex;
-    $this->filterKey=$filterKey;
-    $this->topicFormat=$topicFormat;
-  }
-
-  public function toArray(){
-    $resArray = array();
-    if($this->filePattern!==null)
-        $resArray['filePattern'] = $this->filePattern;
-    if($this->key!==null)
-        $resArray['key'] = $this->key;
-    if($this->localStorage!==null)
-        $resArray['localStorage'] = $this->localStorage;
-    if($this->logBeginRegex!==null)
-        $resArray['logBeginRegex'] = $this->logBeginRegex;
-    if($this->logPath!==null)
-        $resArray['logPath'] = $this->logPath;
-    if($this->logType!==null)
-        $resArray['logType'] = $this->logType;
-    if($this->regex!==null)
-        $resArray['regex'] = $this->regex;
-    if($this->timeFormat!==null)
-        $resArray['timeFormat'] = $this->timeFormat;
-    if($this->filterRegex!==null)
-        $resArray['filterRegex'] = $this->filterRegex;
-    if($this->filterKey!==null)
-        $resArray['filterKey'] = $this->filterKey;
-    if($this->topicFormat!==null)
-        $resArray['topicFormat'] = $this->topicFormat;
-    return $resArray;
-  }
-}
-
-class Aliyun_Log_Models_Config_OutputDetail {
-    public $projectName;
-    public $logstoreName;
-
-    public function __construct($projectName='',$logstoreName=''){
-      $this->projectName = $projectName;
-      $this->logstoreName = $logstoreName;
-    }
-    public function toArray(){
-      $resArray = array();
-      if($this->projectName!==null)
-        $resArray['projectName'] = $this->projectName;
-      if($this->logstoreName!==null)
-        $resArray['logstoreName'] = $this->logstoreName;
-      return $resArray;
-    }
-}
-
-class Aliyun_Log_Models_Config {
+class Config {
 
     private $configName;
     private $inputType;
@@ -166,7 +92,7 @@ class Aliyun_Log_Models_Config {
     }
 
     public function setFromArray($resp){
-        $inputDetail = new Aliyun_Log_Models_Config_InputDetail();
+        $inputDetail = new InputDetail();
         $inputDetail->filePattern = $resp['inputDetail']['filePattern'];
         $inputDetail->key = $resp['inputDetail']['key'];
         $inputDetail->localStorage = $resp['inputDetail']['localStorage'];
@@ -179,7 +105,7 @@ class Aliyun_Log_Models_Config {
         $inputDetail->filterKey = $resp['inputDetail']['filterKey'];
         $inputDetail->topicFormat = $resp['inputDetail']['topicFormat'];
 
-        $outputDetail = new Aliyun_Log_Models_Config_OutputDetail();
+        $outputDetail = new OutputDetail();
         $outputDetail->projectName = $resp['outputDetail']['projectName'];
         $outputDetail->logstoreName = $resp['outputDetail']['logstoreName'];
 

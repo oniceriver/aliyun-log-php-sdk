@@ -3,20 +3,23 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
+namespace Aliyun\Log\Models\Request;
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
 
 /**
  * 
  *
  * @author log service dev
  */
-class Aliyun_Log_Models_ApplyConfigToMachineGroupRequest extends Aliyun_Log_Models_Request {
+class ApplyConfigToMachineGroupRequest extends Request {
     private $groupName;
-    private $configName; 
+    private $configName;
+
     /**
-     * Aliyun_Log_Models_ApplyConfigToMachineGroupRequest Constructor
+     * ApplyConfigToMachineGroupRequest constructor.
      *
+     * @param null $groupName
+     * @param null $configName
      */
     public function __construct($groupName=null,$configName=null) {
         $this->groupName = $groupName;

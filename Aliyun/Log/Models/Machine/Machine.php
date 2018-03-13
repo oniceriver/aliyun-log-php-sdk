@@ -3,72 +3,9 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
+namespace Aliyun\Log\Models\Machine;
 
-class Aliyun_Log_Models_Machine_Info{
-    public $ip;
-    public $os;
-    public $hostName;
-
-    public function __construct($ip=null,$os=null,$hostName=null){
-        $this->ip = $ip;
-        $this->os = $os;
-        $this->hostName = $hostName;
-    }
-
-    public function getIp(){
-        return $this->ip;
-    }
-    public function setIp($ip){
-        $this->ip = $ip;
-    }
-
-
-    public function getOs(){
-        return $this->os;
-    }
-    public function setOs($os){
-        $this->os = $os;
-    }
-
-    public function getHostName(){
-        return $this->hostName;
-    }
-    public function setHostName($hostname){
-        $this->hostName = $hostName;
-    }
-    public function toArray(){
-        $resArr = array();
-        if($this->ip!==null)
-            $resArr['ip'] = $this->ip;
-        if($this->os!==null)
-            $resArr['os'] = $this->os;
-        if($this->hostName!==null)
-            $resArr['hostName'] = $this->hostName;
-        return $resArr;
-    }
-}
-
-class Aliyun_Log_Models_Machine_Status{
-      public $binaryCurVersion;
-      public $binaryDeployVersion;
-      
-      public function __construct($binaryCurVersion=null,$binaryDeployVersion=null){
-          $this->binaryCurVersion = $binaryCurVersion;
-          $this->binaryDeployVersion = $binaryDeployVersion;
-      }
-
-      public function toArray(){
-          $resArr = array();
-          if($this->binaryCurVersion!==null)
-            $resArr['binaryCurVersion'] = $this->binaryCurVersion;
-          if($this->binaryDeployVersion!==null)
-            $resArr['binaryDeployVersion'] = $this->binaryDeployVersion;
-          return $resArr;
-      }
-}
-
-
-class Aliyun_Log_Models_Machine {
+class Machine {
     private $uuid;
     private $lastHeartbeatTime;
     private $info;
@@ -149,13 +86,13 @@ class Aliyun_Log_Models_Machine {
             $ip=(isset($resp['info']['ip']))?$resp['info']['ip']:null;
             $os=(isset($resp['info']['os']))?$resp['info']['os']:null;
             $hostName=(isset($resp['info']['hostName']))?$resp['info']['hostName']:null;
-            $info = new Aliyun_Log_Models_Machine_Info($ip,$os,$hostName);
+            $info = new Info($ip,$os,$hostName);
         }
         $status = null;
         if(isset($resp['status'])){
             $binaryCurVersion=(isset($resp['status']['binaryCurVersion']))?$resp['status']['binaryCurVersion']:null;
             $binaryDeployVersion=(isset($resp['status']['binaryDeployVersion']))?$resp['status']['binaryDeployVersion']:null;
-            $status = new Aliyun_Log_Models_Machine_Status($binaryCurVersion,$binaryDeployVersion);
+            $status = new Status($binaryCurVersion,$binaryDeployVersion);
         }
         $uuid=(isset($resp['uuid']))?$resp['uuid']:null;
         $lastHeartbeatTime=(isset($resp['lastHeartbeatTime']))?$resp['lastHeartbeatTime']:null;

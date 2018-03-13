@@ -4,14 +4,14 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * The request used to get cursor by fromTime or begin/end mode 
- *
- * @author log service dev
+ * The request used to get cursor by fromTime or begin/end mode
+ * Class GetCursorRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_GetCursorRequest extends Aliyun_Log_Models_Request {
+class GetCursorRequest extends Request {
     
     /**
      * @var string logstore name
@@ -39,17 +39,18 @@ class Aliyun_Log_Models_GetCursorRequest extends Aliyun_Log_Models_Request {
     private $fromTime;
 
     /**
-     * Aliyun_Log_Models_GetCursorRequest Constructor
+     * GetCursorRequest constructor.
+     *
      * @param string $project
-     *            project name
-     * @param string $logstore
-     *            logstore name
-     * @param string $shardId
-     *            shard id
-     * @param string $mode
-     *            query mode,value must be 'begin' or 'end' 
-     * @param string $fromTime
-     *            query by from time,unix_timestamp
+     *                  project name
+     * @param        $logstore
+     *                  logstore name
+     * @param        $shardId
+     *                  shard id
+     * @param null   $mode
+     *                  query mode,value must be 'begin' or 'end'
+     * @param int    $fromTime
+     *                  query by from time,unix_timestamp
      */
     public function __construct($project,$logstore,$shardId,$mode=null,$fromTime=-1) {
       parent::__construct ( $project );

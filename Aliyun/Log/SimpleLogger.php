@@ -3,13 +3,13 @@
  * Copyright (C) Alibaba Cloud Computing
  * All rights reserved
  */
-
+namespace Aliyun\Log;
 /**
  * Class Aliyun_Log_SimpleLogger
  * a wrapper for submit log message to server, to avoid post log frequently, using a internal cache for messages
  * When the count of messages reach the cache size, SimpleLogger will post the messages in bulk, and reset the cache accordingly.
  */
-class Aliyun_Log_SimpleLogger{
+class SimpleLogger{
 
     /**
      * internal cache for log messages

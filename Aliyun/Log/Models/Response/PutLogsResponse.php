@@ -4,19 +4,18 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Response.php');
+namespace Aliyun\Log\Models\Response;
 
 /**
  * The response of the PutLogs API from log service.
- *
- * @author log service dev
+ * Class PutLogsResponse
+ * @package Aliyun\Log\Models\Response
  */
-class Aliyun_Log_Models_PutLogsResponse extends Aliyun_Log_Models_Response {
+class PutLogsResponse extends Response {
     /**
-     * Aliyun_Log_Models_PutLogsResponse constructor
+     * PutLogsResponse constructor.
      *
-     * @param array $header
-     *            PutLogs HTTP response header
+     * @param $headers
      */
     public function __construct($headers) {
         parent::__construct ( $headers );

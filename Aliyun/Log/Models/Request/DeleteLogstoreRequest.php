@@ -4,20 +4,22 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
  * The request used to delete logstore from log service.
- *
- * @author log service dev
+ * Class DeleteLogstoreRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_DeleteLogstoreRequest extends Aliyun_Log_Models_Request{
+class DeleteLogstoreRequest extends Request{
 
     private  $logstore;
+
     /**
-     * Aliyun_Log_Models_DeleteLogstoreRequest constructor
-     * 
-     * @param string $project project name
+     * DeleteLogstoreRequest constructor.
+     *
+     * @param null $project
+     * @param null $logstore
      */
     public function __construct($project=null,$logstore = null) {
         parent::__construct($project);

@@ -4,20 +4,20 @@
  * All rights reserved
  */
 
-require_once realpath(dirname(__FILE__) . '/Request.php');
+namespace Aliyun\Log\Models\Request;
 
 /**
- * 
- *
- * @author log service dev
+ * Class GetConfigRequest
+ * @package Aliyun\Log\Models\Request
  */
-class Aliyun_Log_Models_GetConfigRequest extends Aliyun_Log_Models_Request {
+class GetConfigRequest extends Request {
 
     private $configName;
 
     /**
-     * Aliyun_Log_Models_GetConfigRequest Constructor
+     * GetConfigRequest constructor.
      *
+     * @param null $configName
      */
     public function __construct($configName = null) {
         $this->configName = $configName;
