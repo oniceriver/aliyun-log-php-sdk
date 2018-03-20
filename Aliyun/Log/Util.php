@@ -145,7 +145,7 @@ class Util {
         $url = "";
         $first = true;
         foreach ( $params as $key => $value ) {
-            $val = Aliyun_Log_Util::urlEncodeValue ( $value );
+            $val = static::urlEncodeValue ( $value );
             if ($first) {
                 $first = false;
                 $url = "$key=$val";

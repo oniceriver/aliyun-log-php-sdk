@@ -2,6 +2,7 @@
 
 namespace Aliyun\Log;
 // message Log.Content
+use Aliyun\Log\Protocol\ProtoBuffer;
 class LogContent {
   private $_unknown;
   
@@ -14,7 +15,7 @@ class LogContent {
       } else if (is_resource($in)) {
         $fp = $in;
       } else {
-        throw new Exception('Invalid in parameter');
+        throw new Exception(1,'Invalid in parameter');
       }
       $this->read($fp, $limit);
     }
@@ -22,7 +23,7 @@ class LogContent {
   
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
-      $tag = Protobuf::read_varint($fp, $limit);
+      $tag = ProtoBuffer::read_varint($fp, $limit);
       if ($tag === false) break;
       $wire  = $tag & 0x07;
       $field = $tag >> 3;
@@ -30,51 +31,51 @@ class LogContent {
       switch($field) {
         case 1:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
-            throw new Exception('Protobuf::read_varint returned false');
+            throw new Exception(1,'Protobuf::read_varint returned false');
           if ($len > 0)
             $tmp = fread($fp, $len);
           else
             $tmp = '';
           if ($tmp === false)
-            throw new Exception("fread($len) returned false");
+            throw new Exception(1,"fread($len) returned false");
           $this->key_ = $tmp;
           $limit-=$len;
           break;
         case 2:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
-            throw new Exception('Protobuf::read_varint returned false');
+            throw new Exception(1,'Protobuf::read_varint returned false');
           if ($len > 0)
             $tmp = fread($fp, $len);
           else
             $tmp = '';
           if ($tmp === false)
-            throw new Exception("fread($len) returned false");
+            throw new Exception(1,"fread($len) returned false");
           $this->value_ = $tmp;
           $limit-=$len;
           break;
         default:
-          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+          $this->_unknown[$field . '-' . ProtoBuffer::get_wiretype($wire)][] = ProtoBuffer::read_field($fp, $wire, $limit);
       }
     }
     if (!$this->validateRequired())
-      throw new Exception('Required fields are missing');
+      throw new Exception(1,'Required fields are missing');
   }
   
   function write($fp) {
     if (!$this->validateRequired())
-      throw new Exception('Required fields are missing');
+      throw new Exception(1,'Required fields are missing');
     if (!is_null($this->key_)) {
       fwrite($fp, "\x0a");
-      Protobuf::write_varint($fp, strlen($this->key_));
+      ProtoBuffer::write_varint($fp, strlen($this->key_));
       fwrite($fp, $this->key_);
     }
     if (!is_null($this->value_)) {
       fwrite($fp, "\x12");
-      Protobuf::write_varint($fp, strlen($this->value_));
+      ProtoBuffer::write_varint($fp, strlen($this->value_));
       fwrite($fp, $this->value_);
     }
   }
@@ -83,11 +84,11 @@ class LogContent {
     $size = 0;
     if (!is_null($this->key_)) {
       $l = strlen($this->key_);
-      $size += 1 + Protobuf::size_varint($l) + $l;
+      $size += 1 + ProtoBuffer::size_varint($l) + $l;
     }
     if (!is_null($this->value_)) {
       $l = strlen($this->value_);
-      $size += 1 + Protobuf::size_varint($l) + $l;
+      $size += 1 + ProtoBuffer::size_varint($l) + $l;
     }
     return $size;
   }
@@ -100,9 +101,9 @@ class LogContent {
   
   public function __toString() {
     return ''
-         . Protobuf::toString('unknown', $this->_unknown)
-         . Protobuf::toString('key_', $this->key_)
-         . Protobuf::toString('value_', $this->value_);
+         . ProtoBuffer::toString('unknown', $this->_unknown)
+         . ProtoBuffer::toString('key_', $this->key_)
+         . ProtoBuffer::toString('value_', $this->value_);
   }
   
   // required string key = 1;

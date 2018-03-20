@@ -87,7 +87,7 @@ class Group {
         $groupAttribute = null;
         if(isset($resp['groupAttribute'])){
             $groupAttributeArr = $resp['groupAttribute'];
-            $groupAttribute = new Aliyun_Log_Models_MachineGroup_GroupAttribute();
+            $groupAttribute = new GroupAttribute();
             if(isset($groupAttributeArr['externalName']))
               $groupAttribute->externalName = $groupAttributeArr['externalName'];
             if(isset($groupAttributeArr['groupTopic']))

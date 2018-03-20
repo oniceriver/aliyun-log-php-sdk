@@ -95,7 +95,7 @@ class RequestCore
 	/**
 	 * The default class to use for HTTP Responses (defaults to <ResponseCore>).
 	 */
-	public $response_class = 'ResponseCore';
+	public $response_class = __NAMESPACE__.'\ResponseCore';
 
 	/**
 	 * Default useragent string to use.
@@ -542,7 +542,7 @@ class RequestCore
 		{
 			if (fseek($this->read_stream, $this->seek_position) !== 0)
 			{
-				throw new RequestCore_Exception('The stream does not support seeking and is either not at the requested position or the position is unknown.');
+				throw new RequestCoreException('The stream does not support seeking and is either not at the requested position or the position is unknown.');
 			}
 		}
 
@@ -702,7 +702,7 @@ class RequestCore
 				{
 					if (!isset($this->read_stream_size) || $this->read_stream_size < 0)
 					{
-						throw new RequestCore_Exception('The stream size for the streaming upload cannot be determined.');
+						throw new RequestCoreException('The stream size for the streaming upload cannot be determined.');
 					}
 
 					curl_setopt($curl_handle, CURLOPT_INFILESIZE, $this->read_stream_size);
@@ -819,7 +819,7 @@ class RequestCore
 
 		if ($this->response === false)
 		{
-			throw new RequestCore_Exception('cURL resource: ' . (string) $curl_handle . '; cURL error: ' . curl_error($curl_handle) . ' (' . curl_errno($curl_handle) . ')');
+			throw new RequestCoreException('cURL resource: ' . (string) $curl_handle . '; cURL error: ' . curl_error($curl_handle) . ' (' . curl_errno($curl_handle) . ')');
 		}
 
 		$parsed_response = $this->process_response($curl_handle, $this->response);
@@ -892,7 +892,7 @@ class RequestCore
 				// Since curl_errno() isn't reliable for handles that were in multirequests, we check the 'result' of the info read, which contains the curl error number, (listed here http://curl.haxx.se/libcurl/c/libcurl-errors.html )
 				if ($done['result'] > 0)
 				{
-					throw new RequestCore_Exception('cURL resource: ' . (string) $done['handle'] . '; cURL error: ' . curl_error($done['handle']) . ' (' . $done['result'] . ')');
+					throw new RequestCoreException('cURL resource: ' . (string) $done['handle'] . '; cURL error: ' . curl_error($done['handle']) . ' (' . $done['result'] . ')');
 				}
 
 				// Because curl_multi_info_read() might return more than one message about a request, we check to see if this request is already in our array of completed requests
@@ -963,60 +963,5 @@ class RequestCore
 	public function get_response_code()
 	{
 		return $this->response_code;
-	}
-}
-
-
-/**
- * Container for all response-related methods.
- */
-class ResponseCore
-{
-	/**
-	 * Stores the HTTP header information.
-	 */
-	public $header;
-
-	/**
-	 * Stores the SimpleXML response.
-	 */
-	public $body;
-
-	/**
-	 * Stores the HTTP response code.
-	 */
-	public $status;
-
-	/**
-	 * Constructs a new instance of this class.
-	 *
-	 * @param array $header (Required) Associative array of HTTP headers (typically returned by <RequestCore::get_response_header()>).
-	 * @param string $body (Required) XML-formatted response from AWS.
-	 * @param integer $status (Optional) HTTP response status code from the request.
-	 * @return object Contains an <php:array> `header` property (HTTP headers as an associative array), a <php:SimpleXMLElement> or <php:string> `body` property, and an <php:integer> `status` code.
-	 */
-	public function __construct($header, $body, $status = null)
-	{
-		$this->header = $header;
-		$this->body = $body;
-		$this->status = $status;
-
-		return $this;
-	}
-
-	/**
-	 * Did we receive the status code we expected?
-	 *
-	 * @param integer|array $codes (Optional) The status code(s) to expect. Pass an <php:integer> for a single acceptable value, or an <php:array> of integers for multiple acceptable values.
-	 * @return boolean Whether we received the expected status code or not.
-	 */
-	public function isOK($codes = array(200, 201, 204, 206))
-	{
-		if (is_array($codes))
-		{
-			return in_array($this->status, $codes);
-		}
-
-		return $this->status === $codes;
 	}
 }

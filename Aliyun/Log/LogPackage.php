@@ -2,6 +2,7 @@
 namespace Aliyun\Log;
 
 // message LogPackage
+use Aliyun\Log\Protocol\ProtoBuffer;
 class LogPackage {
   private $_unknown;
   
@@ -22,7 +23,7 @@ class LogPackage {
   
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
-      $tag = Protobuf::read_varint($fp, $limit);
+      $tag = ProtoBuffer::read_varint($fp, $limit);
       if ($tag === false) break;
       $wire  = $tag & 0x07;
       $field = $tag >> 3;
@@ -30,7 +31,7 @@ class LogPackage {
       switch($field) {
         case 1:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
             throw new Exception('Protobuf::read_varint returned false');
           if ($len > 0)
@@ -44,14 +45,14 @@ class LogPackage {
           break;
         case 2:
           ASSERT('$wire == 0');
-          $tmp = Protobuf::read_varint($fp, $limit);
+          $tmp = ProtoBuffer::read_varint($fp, $limit);
           if ($tmp === false)
             throw new Exception('Protobuf::read_varint returned false');
           $this->uncompressSize_ = $tmp;
           
           break;
         default:
-          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+          $this->_unknown[$field . '-' . ProtoBuffer::get_wiretype($wire)][] = ProtoBuffer::read_field($fp, $wire, $limit);
       }
     }
     if (!$this->validateRequired())
@@ -63,12 +64,12 @@ class LogPackage {
       throw new Exception('Required fields are missing');
     if (!is_null($this->data_)) {
       fwrite($fp, "\x0a");
-      Protobuf::write_varint($fp, strlen($this->data_));
+        ProtoBuffer::write_varint($fp, strlen($this->data_));
       fwrite($fp, $this->data_);
     }
     if (!is_null($this->uncompressSize_)) {
       fwrite($fp, "\x10");
-      Protobuf::write_varint($fp, $this->uncompressSize_);
+        ProtoBuffer::write_varint($fp, $this->uncompressSize_);
     }
   }
   
@@ -76,10 +77,10 @@ class LogPackage {
     $size = 0;
     if (!is_null($this->data_)) {
       $l = strlen($this->data_);
-      $size += 1 + Protobuf::size_varint($l) + $l;
+      $size += 1 + ProtoBuffer::size_varint($l) + $l;
     }
     if (!is_null($this->uncompressSize_)) {
-      $size += 1 + Protobuf::size_varint($this->uncompressSize_);
+      $size += 1 + ProtoBuffer::size_varint($this->uncompressSize_);
     }
     return $size;
   }
@@ -91,9 +92,9 @@ class LogPackage {
   
   public function __toString() {
     return ''
-         . Protobuf::toString('unknown', $this->_unknown)
-         . Protobuf::toString('data_', $this->data_)
-         . Protobuf::toString('uncompressSize_', $this->uncompressSize_);
+         . ProtoBuffer::toString('unknown', $this->_unknown)
+         . ProtoBuffer::toString('data_', $this->data_)
+         . ProtoBuffer::toString('uncompressSize_', $this->uncompressSize_);
   }
   
   // required bytes data = 1;

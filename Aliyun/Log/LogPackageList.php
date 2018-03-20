@@ -1,6 +1,7 @@
 <?php
 namespace Aliyun\Log;
 
+use Aliyun\Log\Protocol\ProtoBuffer;
 // message LogPackageList
 class LogPackageList {
     private $_unknown;
@@ -22,7 +23,7 @@ class LogPackageList {
 
     function read($fp, &$limit = PHP_INT_MAX) {
         while(!feof($fp) && $limit > 0) {
-            $tag = Protobuf::read_varint($fp, $limit);
+            $tag = ProtoBuffer::read_varint($fp, $limit);
             if ($tag === false) break;
             $wire  = $tag & 0x07;
             $field = $tag >> 3;
@@ -30,7 +31,7 @@ class LogPackageList {
             switch($field) {
                 case 1:
                     ASSERT('$wire == 2');
-                    $len = Protobuf::read_varint($fp, $limit);
+                    $len = ProtoBuffer::read_varint($fp, $limit);
                     if ($len === false)
                         throw new Exception('Protobuf::read_varint returned false');
                     $limit-=$len;
@@ -38,7 +39,7 @@ class LogPackageList {
                     ASSERT('$len == 0');
                     break;
                 default:
-                    $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+                    $this->_unknown[$field . '-' . ProtoBuffer::get_wiretype($wire)][] = ProtoBuffer::read_field($fp, $wire, $limit);
             }
         }
         if (!$this->validateRequired())
@@ -51,7 +52,7 @@ class LogPackageList {
         if (!is_null($this->packages_))
             foreach($this->packages_ as $v) {
                 fwrite($fp, "\x0a");
-                Protobuf::write_varint($fp, $v->size()); // message
+                ProtoBuffer::write_varint($fp, $v->size()); // message
                 $v->write($fp);
             }
     }
@@ -61,7 +62,7 @@ class LogPackageList {
         if (!is_null($this->packages_))
             foreach($this->packages_ as $v) {
                 $l = $v->size();
-                $size += 1 + Protobuf::size_varint($l) + $l;
+                $size += 1 + ProtoBuffer::size_varint($l) + $l;
             }
         return $size;
     }
@@ -72,8 +73,8 @@ class LogPackageList {
 
     public function __toString() {
         return ''
-            . Protobuf::toString('unknown', $this->_unknown)
-            . Protobuf::toString('packages_', $this->packages_);
+            . ProtoBuffer::toString('unknown', $this->_unknown)
+            . ProtoBuffer::toString('packages_', $this->packages_);
     }
 
     // repeated .LogPackage packages = 1;

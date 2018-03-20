@@ -234,12 +234,12 @@ class Client
 
     /**
      * Put logs to Log Service.
-     * Unsuccessful opertaion will cause an Aliyun_Log_Exception.
+     * Unsuccessful opertaion will cause an Aliyun\Log\Exception.
      *
-     * @param PutLogsRequest $request the PutLogs request parameters class
+     * @param Request\PutLogsRequest $request
      *
+     * @return Response\PutLogsResponse
      * @throws Exception
-     * @return PutLogsResponse
      */
     public function putLogs(Request\PutLogsRequest $request)
     {

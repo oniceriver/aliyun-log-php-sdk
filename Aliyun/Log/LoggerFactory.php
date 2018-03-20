@@ -25,10 +25,10 @@ class LoggerFactory{
      */
     public static function getLogger($client, $project, $logstore, $topic = null){
         if($project === null || $project == ''){
-            throw new Exception('project name is blank!');
+            throw new Exception(1,'project name is blank!');
         }
         if($logstore === null || $logstore == ''){
-            throw new Exception('logstore name is blank!');
+            throw new Exception(1,'logstore name is blank!');
         }
         if($topic === null){
             $topic = '';
@@ -36,7 +36,7 @@ class LoggerFactory{
         $loggerKey = $project.'#'.$logstore.'#'.$topic;
         if (!array_key_exists($loggerKey, static::$loggerMap))
         {
-            $instanceSimpleLogger = new Aliyun_Log_SimpleLogger($client,$project,$logstore,$topic);
+            $instanceSimpleLogger = new SimpleLogger($client,$project,$logstore,$topic);
             static::$loggerMap[$loggerKey] = $instanceSimpleLogger;
         }
         return static::$loggerMap[$loggerKey];

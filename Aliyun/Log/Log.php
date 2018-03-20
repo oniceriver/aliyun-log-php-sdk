@@ -1,6 +1,7 @@
 <?php
 // message Log
 namespace Aliyun\Log;
+use Aliyun\Log\Protocol\ProtoBuffer;
 class Log {
   private $_unknown;
   
@@ -21,7 +22,7 @@ class Log {
   
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
-      $tag = Protobuf::read_varint($fp, $limit);
+      $tag = ProtoBuffer::read_varint($fp, $limit);
       if ($tag === false) break;
       $wire  = $tag & 0x07;
       $field = $tag >> 3;
@@ -29,7 +30,7 @@ class Log {
       switch($field) {
         case 1:
           ASSERT('$wire == 0');
-          $tmp = Protobuf::read_varint($fp, $limit);
+          $tmp = ProtoBuffer::read_varint($fp, $limit);
           if ($tmp === false)
             throw new Exception(1,'Protobuf::read_varint returned false');
           $this->time_ = $tmp;
@@ -37,15 +38,15 @@ class Log {
           break;
         case 2:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
             throw new Exception(1,'Protobuf::read_varint returned false');
           $limit-=$len;
-          $this->contents_[] = new Log_Content($fp, $len);
+          $this->contents_[] = new LogContent($fp, $len);
           ASSERT('$len == 0');
           break;
         default:
-          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+          $this->_unknown[$field . '-' . ProtoBuffer::get_wiretype($wire)][] = ProtoBuffer::read_field($fp, $wire, $limit);
       }
     }
     if (!$this->validateRequired())
@@ -57,12 +58,12 @@ class Log {
       throw new Exception(1,'Required fields are missing');
     if (!is_null($this->time_)) {
       fwrite($fp, "\x08");
-      Protobuf::write_varint($fp, $this->time_);
+        ProtoBuffer::write_varint($fp, $this->time_);
     }
     if (!is_null($this->contents_))
       foreach($this->contents_ as $v) {
         fwrite($fp, "\x12");
-        Protobuf::write_varint($fp, $v->size()); // message
+          ProtoBuffer::write_varint($fp, $v->size()); // message
         $v->write($fp);
       }
   }
@@ -70,12 +71,12 @@ class Log {
   public function size() {
     $size = 0;
     if (!is_null($this->time_)) {
-      $size += 1 + Protobuf::size_varint($this->time_);
+      $size += 1 + ProtoBuffer::size_varint($this->time_);
     }
     if (!is_null($this->contents_))
       foreach($this->contents_ as $v) {
         $l = $v->size();
-        $size += 1 + Protobuf::size_varint($l) + $l;
+        $size += 1 + ProtoBuffer::size_varint($l) + $l;
       }
     return $size;
   }
@@ -87,9 +88,9 @@ class Log {
   
   public function __toString() {
     return ''
-         . Protobuf::toString('unknown', $this->_unknown)
-         . Protobuf::toString('time_', $this->time_)
-         . Protobuf::toString('contents_', $this->contents_);
+         . ProtoBuffer::toString('unknown', $this->_unknown)
+         . ProtoBuffer::toString('time_', $this->time_)
+         . ProtoBuffer::toString('contents_', $this->contents_);
   }
   
   // required uint32 time = 1;

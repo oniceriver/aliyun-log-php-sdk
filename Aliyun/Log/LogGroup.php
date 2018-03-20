@@ -2,6 +2,7 @@
 namespace Aliyun\Log;
 
 // message LogGroup
+use Aliyun\Log\Protocol\ProtoBuffer;
 class LogGroup {
   private $_unknown;
   
@@ -14,7 +15,7 @@ class LogGroup {
       } else if (is_resource($in)) {
         $fp = $in;
       } else {
-        throw new Exception('Invalid in parameter');
+        throw new Exception(1,'Invalid in parameter');
       }
       $this->read($fp, $limit);
     }
@@ -22,7 +23,7 @@ class LogGroup {
   
   function read($fp, &$limit = PHP_INT_MAX) {
     while(!feof($fp) && $limit > 0) {
-      $tag = Protobuf::read_varint($fp, $limit);
+      $tag = ProtoBuffer::read_varint($fp, $limit);
       if ($tag === false) break;
       $wire  = $tag & 0x07;
       $field = $tag >> 3;
@@ -30,18 +31,18 @@ class LogGroup {
       switch($field) {
         case 1:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
-            throw new Exception('Protobuf::read_varint returned false');
+            throw new Exception(1,'Protobuf::read_varint returned false');
           $limit-=$len;
           $this->logs_[] = new Log($fp, $len);
           ASSERT('$len == 0');
           break;
         case 2:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
-            throw new Exception('Protobuf::read_varint returned false');
+            throw new Exception(1,'Protobuf::read_varint returned false');
           if ($len > 0)
             $tmp = fread($fp, $len);
           else
@@ -53,7 +54,7 @@ class LogGroup {
           break;
         case 3:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
             throw new Exception('Protobuf::read_varint returned false');
           if ($len > 0)
@@ -67,7 +68,7 @@ class LogGroup {
           break;
         case 4:
           ASSERT('$wire == 2');
-          $len = Protobuf::read_varint($fp, $limit);
+          $len = ProtoBuffer::read_varint($fp, $limit);
           if ($len === false)
             throw new Exception('Protobuf::read_varint returned false');
           if ($len > 0)
@@ -80,7 +81,7 @@ class LogGroup {
           $limit-=$len;
           break;
         default:
-          $this->_unknown[$field . '-' . Protobuf::get_wiretype($wire)][] = Protobuf::read_field($fp, $wire, $limit);
+          $this->_unknown[$field . '-' . ProtoBuffer::get_wiretype($wire)][] = ProtoBuffer::read_field($fp, $wire, $limit);
       }
     }
     if (!$this->validateRequired())
@@ -93,22 +94,22 @@ class LogGroup {
     if (!is_null($this->logs_))
       foreach($this->logs_ as $v) {
         fwrite($fp, "\x0a");
-        Protobuf::write_varint($fp, $v->size()); // message
+          ProtoBuffer::write_varint($fp, $v->size()); // message
         $v->write($fp);
       }
     if (!is_null($this->reserved_)) {
       fwrite($fp, "\x12");
-      Protobuf::write_varint($fp, strlen($this->reserved_));
+        ProtoBuffer::write_varint($fp, strlen($this->reserved_));
       fwrite($fp, $this->reserved_);
     }
     if (!is_null($this->topic_)) {
       fwrite($fp, "\x1a");
-      Protobuf::write_varint($fp, strlen($this->topic_));
+        ProtoBuffer::write_varint($fp, strlen($this->topic_));
       fwrite($fp, $this->topic_);
     }
     if (!is_null($this->source_)) {
       fwrite($fp, "\"");
-      Protobuf::write_varint($fp, strlen($this->source_));
+        ProtoBuffer::write_varint($fp, strlen($this->source_));
       fwrite($fp, $this->source_);
     }
   }
@@ -118,19 +119,19 @@ class LogGroup {
     if (!is_null($this->logs_))
       foreach($this->logs_ as $v) {
         $l = $v->size();
-        $size += 1 + Protobuf::size_varint($l) + $l;
+        $size += 1 + ProtoBuffer::size_varint($l) + $l;
       }
     if (!is_null($this->reserved_)) {
       $l = strlen($this->reserved_);
-      $size += 1 + Protobuf::size_varint($l) + $l;
+      $size += 1 + ProtoBuffer::size_varint($l) + $l;
     }
     if (!is_null($this->topic_)) {
       $l = strlen($this->topic_);
-      $size += 1 + Protobuf::size_varint($l) + $l;
+      $size += 1 + ProtoBuffer::size_varint($l) + $l;
     }
     if (!is_null($this->source_)) {
       $l = strlen($this->source_);
-      $size += 1 + Protobuf::size_varint($l) + $l;
+      $size += 1 + ProtoBuffer::size_varint($l) + $l;
     }
     return $size;
   }
@@ -141,11 +142,11 @@ class LogGroup {
   
   public function __toString() {
     return ''
-         . Protobuf::toString('unknown', $this->_unknown)
-         . Protobuf::toString('logs_', $this->logs_)
-         . Protobuf::toString('reserved_', $this->reserved_)
-         . Protobuf::toString('topic_', $this->topic_)
-         . Protobuf::toString('source_', $this->source_);
+         . ProtoBuffer::toString('unknown', $this->_unknown)
+         . ProtoBuffer::toString('logs_', $this->logs_)
+         . ProtoBuffer::toString('reserved_', $this->reserved_)
+         . ProtoBuffer::toString('topic_', $this->topic_)
+         . ProtoBuffer::toString('source_', $this->source_);
   }
   
   // repeated .Log logs = 1;
